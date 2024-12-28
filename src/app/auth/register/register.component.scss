@@ -1,0 +1,112 @@
+/* 1) Kontener na całą stronę – centrowanie karty w pionie i poziomie */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* pełna wysokość widoku */
+    background-color: #f5f6fa;
+}
+
+/* 2) Karta PrimeNG: p-card */
+.register-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    .p-card-header {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.3rem;
+        padding: 1rem 0;
+    }
+}
+
+/* 3) Wspólna klasa dla wierszy formularza */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+/* 4) Etykiety i pola formularza */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #333;
+}
+
+input[pInputText] {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* 5) Radiobutton (firma / user) */
+.radio-row {
+    .label-radio {
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: #333;
+    }
+
+    .radio-options {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .radio-label {
+        margin-right: 1.5rem;
+    }
+}
+
+/* 6) Wiersz z imieniem i nazwiskiem (dwie kolumny) */
+.name-row {
+    flex-direction: row;
+    gap: 1rem;
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+}
+
+/* 7) Przycisk na całą szerokość */
+.btn-row {
+    margin-top: 1rem;
+
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+}
+
+/* 8) Komunikaty PrimeNG (błędy / sukces) */
+:host ::ng-deep .p-message-error,
+:host ::ng-deep .p-message-success {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* 9) Link do logowania pod formularzem */
+.login-link-row {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+
+    .login-link {
+        color: #007ad9;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

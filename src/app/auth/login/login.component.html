@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="login-container">
+    <p-card header="Logowanie" class="login-card">
+        <div class="form-wrapper">
+            <!-- E-mail -->
+            <div class="form-row">
+                <label for="email" class="form-label">E-mail</label>
+                <input id="email" type="text" pInputText [(ngModel)]="email" placeholder="Podaj e-mail" />
+            </div>
+
+            <!-- Hasło -->
+            <div class="form-row">
+                <label for="password" class="form-label">Hasło</label>
+                <input id="password" type="password" pInputText [(ngModel)]="password" placeholder="Podaj hasło" />
+            </div>
+
+            <!-- Błąd -->
+            <div class="form-row" *ngIf="errorMessage">
+                <p-message severity="error" text="{{ errorMessage }}"></p-message>
+            </div>
+
+            <!-- Przycisk Zaloguj -->
+            <div class="btn-row">
+                <p-button label="Zaloguj" icon="pi pi-sign-in" class="p-button-primary login-btn" (onClick)="onLogin()">
+                </p-button>
+            </div>
+        </div>
+
+        <div class="register-link-row">
+            <span>Nie masz konta?
+                <a (click)="onRegister()" class="register-link">Zarejestruj się</a>
+            </span>
+        </div>
+    </p-card>
+</div>

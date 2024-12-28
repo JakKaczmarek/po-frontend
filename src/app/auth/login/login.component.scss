@@ -1,0 +1,94 @@
+/* 1) Główny kontener logowania */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Pełna wysokość okna przeglądarki */
+    background-color: #f5f6fa;
+}
+
+/* 2) Karta PrimeNG (p-card) */
+.login-card {
+    width: 95%;
+    max-width: 400px;
+    margin: auto;
+    /* Wycentrowanie poziome */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    .p-card-header {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.3rem;
+        padding: 1rem 0;
+    }
+}
+
+/* 3) Opakowanie formularza (z polami E-mail, Hasło, Przycisk) */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Ustawiamy pola w pionie */
+    padding: 1rem;
+    /* Wewnętrzny odstęp w karcie */
+}
+
+/* 4) Wiersz formularza (E-mail, Hasło, Błąd, itp.) */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+/* 5) Etykiety i pola */
+.form-label {
+    color: #333;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+input[pInputText] {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* 6) Wiersz z przyciskiem “Zaloguj” */
+.btn-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+
+    .login-btn {
+        width: 100%;
+        font-weight: 600;
+    }
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+}
+
+/* 7) Styl komunikatu błędu (p-message) */
+:host ::ng-deep .p-message-error {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* 8) Sekcja linku “Zarejestruj się” */
+.register-link-row {
+    text-align: center;
+    font-size: 0.9rem;
+    padding-bottom: 1rem;
+
+    .register-link {
+        color: #007ad9;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

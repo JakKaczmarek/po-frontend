@@ -1,1 +1,74 @@
-<p>register works!</p>
+<div class="register-container">
+    <!-- KARTA REJESTRACJI -->
+    <p-card header="Rejestracja" class="register-card">
+
+        <!-- Rodzaj konta (firma / user) -->
+        <div class="form-row radio-row">
+            <label class="label-radio">Rodzaj konta</label>
+            <div class="radio-options">
+                <div class="user"> <p-radioButton name="userType" value="user" [(ngModel)]="userType"
+                        inputId="radioUser"></p-radioButton>
+                    <label for="radioUser" class="radio-label">Zwykły użytkownik</label>
+                </div>
+                <div class="company"> <p-radioButton name="userType" value="company" [(ngModel)]="userType"
+                        inputId="radioCompany"></p-radioButton>
+                    <label for="radioCompany" class="radio-label">Firma</label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- E-mail -->
+        <div class="form-row">
+            <label for="email" class="form-label">E-mail</label>
+            <input id="email" type="text" pInputText [(ngModel)]="email" placeholder="Podaj e-mail" />
+        </div>
+
+        <!-- Hasło -->
+        <div class="form-row">
+            <label for="password" class="form-label">Hasło</label>
+            <input id="password" type="password" pInputText [(ngModel)]="password" placeholder="Podaj hasło" />
+        </div>
+
+        <!-- Imię i nazwisko obok siebie -->
+        <div class="form-row name-row">
+            <div class="column">
+                <label for="firstName" class="form-label">Imię</label>
+                <input id="firstName" type="text" pInputText [(ngModel)]="firstName" placeholder="np. Jan" />
+            </div>
+            <div class="column">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <input id="lastName" type="text" pInputText [(ngModel)]="lastName" placeholder="np. Kowalski" />
+            </div>
+        </div>
+
+        <!-- Telefon -->
+        <div class="form-row">
+            <label for="phone" class="form-label">Telefon</label>
+            <input id="phone" type="number" pInputText [(ngModel)]="phone" placeholder="np. 555555555" />
+        </div>
+
+        <!-- Komunikaty o błędach / sukcesie -->
+        <div class="form-row" *ngIf="errorMessage">
+            <p-message severity="error" text="{{ errorMessage }}"></p-message>
+        </div>
+        <div class="form-row" *ngIf="successMessage">
+            <p-message severity="success" text="{{ successMessage }}"></p-message>
+        </div>
+
+        <!-- Przycisk Zarejestruj -->
+        <div class="form-row btn-row">
+            <p-button label="Zarejestruj" icon="pi pi-user-plus" class="p-button-success register-btn"
+                (onClick)="onRegister()">
+            </p-button>
+        </div>
+
+        <!-- Link do logowania -->
+        <div class="login-link-row">
+            <span>Masz już konto?
+                <a routerLink="/login" class="login-link">Zaloguj się</a>
+            </span>
+        </div>
+
+    </p-card>
+</div>
