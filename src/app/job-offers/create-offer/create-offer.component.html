@@ -1,1 +1,42 @@
-<p>create-offer works!</p>
+<div class="create-offer">
+    <h2>Dodaj nową ofertę pracy</h2>
+
+    <form (ngSubmit)="onSubmit()" #offerForm="ngForm">
+        <div class="form-group">
+            <label for="title">Tytuł</label>
+            <input id="title" type="text" pInputText [(ngModel)]="offer.title" name="title"
+                placeholder="Wprowadź tytuł oferty" required />
+        </div>
+
+        <div class="form-group">
+            <label for="companyName">Nazwa firmy</label>
+            <input id="companyName" type="text" pInputText [(ngModel)]="offer.companyName" name="companyName"
+                placeholder="Wprowadź nazwę firmy" required />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Opis</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="offer.description" name="description" rows="4"
+                placeholder="Podaj opis oferty" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Lokalizacja</label>
+            <input id="location" type="text" pInputText [(ngModel)]="offer.location" name="location"
+                placeholder="Wprowadź lokalizację" required />
+        </div>
+
+        <div class="form-group">
+            <label for="salary">Wynagrodzenie</label>
+            <input id="salary" type="number" pInputText [(ngModel)]="offer.salary" name="salary"
+                placeholder="Podaj wynagrodzenie (opcjonalne)" />
+        </div>
+
+        <div class="form-actions">
+            <p-button type="submit" label="Dodaj ofertę" icon="pi pi-check" class="p-button-success"
+                [disabled]="!offerForm.valid"></p-button>
+            <p-button type="button" label="Anuluj" icon="pi pi-times" class="p-button-secondary"
+                (click)="onCancel()"></p-button>
+        </div>
+    </form>
+</div>

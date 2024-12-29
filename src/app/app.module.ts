@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DialogModule } from 'primeng/dialog';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DialogModule } from 'primeng/dialog';
     ListOffersComponent,
     CreateOfferComponent,
     OfferDetailsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
