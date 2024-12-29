@@ -13,7 +13,7 @@
         <p><strong>Opis:</strong></p>
         <p>{{ jobOffer.description }}</p>
         <p><strong>Lokalizacja:</strong> {{ jobOffer.location }}</p>
-        <p><strong>Wynagrodzenie:</strong> {{ jobOffer.salary || 'Nie podano' }}</p>
+        <p><strong>Wynagrodzenie:</strong> {{ jobOffer.salary + ' PLN'|| 'Nie podano' }}</p>
         <p><strong>Data utworzenia:</strong> {{ jobOffer.createdAt }}</p>
         <p><strong>Kontakt:</strong> {{ jobOffer.company }}</p>
 

@@ -23,7 +23,7 @@
         <div class="p-card-title">{{ offer.title }}</div>
         <div class="p-card-subtitle">Firma: {{ offer.companyName }}</div>
         <div>Lokalizacja: {{ offer.location }}</div>
-        <div>Wynagrodzenie: {{ offer.salary || 'Nie podano' }}</div>
+        <div>Wynagrodzenie: {{ offer.salary + ' PLN' || 'Nie podano' }}</div>
         <div>
             <p-button label="Szczegóły" icon="pi pi-eye" (onClick)="navigateToDetails(offer.id)"></p-button>
         </div>
