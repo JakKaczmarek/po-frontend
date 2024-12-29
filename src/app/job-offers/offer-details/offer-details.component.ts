@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobOfferService } from '../../services/job-offer.service';
 import { ApplicationService } from '../../services/application.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-offer-details',
@@ -13,13 +14,15 @@ export class OfferDetailsComponent implements OnInit {
   loading: boolean = false;
   errorMessage: string = '';
   selectedFile: File | null = null;
-  showDialog: boolean = false; // Kontroluje widoczność popupu
+  showDialog: boolean = false;
+  isPdfFile: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private jobOfferService: JobOfferService,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -55,13 +58,24 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
+    const file: File = event.target.files[0];
+    if (file && file.name.endsWith('.pdf')) {
+      this.selectedFile = file;
+      this.isPdfFile = true;
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Błąd',
+        detail: 'Proszę wybrać plik CV (PDF)'
+      });
+      this.selectedFile = null;
+      this.isPdfFile = false;
+    }
   }
 
   onApply(): void {
-    if (!this.selectedFile) {
-      alert('Proszę wybrać plik CV (PDF).');
-      return;
+    if (!this.selectedFile || !this.isPdfFile) {
+      return; // Dodatkowe zabezpieczenie
     }
 
     const formData = new FormData();
@@ -70,13 +84,26 @@ export class OfferDetailsComponent implements OnInit {
     this.applicationService
       .applyToJobOffer(this.jobOffer.id, formData)
       .subscribe(
-        () => {
-          alert('Aplikacja została pomyślnie wysłana!');
-          this.closeDialog();
-        },
-        () => {
-          alert('Nie udało się wysłać aplikacji. Spróbuj ponownie.');
+        {
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sukces',
+              detail: 'Aplikacja została pomyślnie wysłana!',
+            });
+            this.closeDialog();
+          },
+          error: () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Błąd',
+              detail: 'Nie udało się wysłać aplikacji. Spróbuj ponownie.'
+            });
+          }
+
         }
+
       );
   }
+
 }

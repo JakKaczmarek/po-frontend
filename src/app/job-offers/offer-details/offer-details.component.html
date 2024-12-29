@@ -33,8 +33,8 @@
                 <div class="popup-buttons">
                     <p-button label="Anuluj" icon="pi pi-times" class="p-button-secondary"
                         (onClick)="closeDialog()"></p-button>
-                    <p-button label="Aplikuj" icon="pi pi-check" class="p-button-success"
-                        (onClick)="onApply()"></p-button>
+                    <p-button label="Aplikuj" icon="pi pi-check" class="p-button-success" (onClick)="onApply()"
+                        [disabled]="!selectedFile || !isPdfFile"></p-button>
                 </div>
             </div>
         </p-dialog>
