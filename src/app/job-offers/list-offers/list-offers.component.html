@@ -1,14 +1,25 @@
 <div class="job-offers">
     <h2>Oferty pracy</h2>
 
+    <!-- Pole wyszukiwania -->
+    <div class="search-bar">
+        <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()"
+            placeholder="Wyszukaj ofertę pracy" />
+    </div>
+
     <!-- Przycisk do tworzenia ofert -->
     <div *ngIf="isCompany" class="create-offer-btn">
         <p-button label="Dodaj ofertę pracy" icon="pi pi-plus" class="p-button-success"
             (onClick)="navigateToCreateOffer()"></p-button>
     </div>
 
+    <!-- Komunikat o braku ofert -->
+    <div *ngIf="filteredJobOffers.length === 0" class="no-offers">
+        <p>Brak dostępnych ofert pracy.</p>
+    </div>
+
     <!-- Lista ofert -->
-    <p-card *ngFor="let offer of jobOffers" class="job-card">
+    <p-card *ngFor="let offer of filteredJobOffers" class="job-card">
         <div class="p-card-title">{{ offer.title }}</div>
         <div class="p-card-subtitle">Firma: {{ offer.companyName }}</div>
         <div>Lokalizacja: {{ offer.location }}</div>

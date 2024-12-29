@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ListOffersComponent implements OnInit {
   jobOffers: any[] = [];
+  filteredJobOffers: any[] = [];
+  searchTerm: string = '';
   isCompany: boolean = false;
 
   constructor(
@@ -26,11 +28,19 @@ export class ListOffersComponent implements OnInit {
   private loadJobOffers(): void {
     this.jobOfferService.getJobOffers().subscribe((data) => {
       this.jobOffers = data;
+      this.filteredJobOffers = this.jobOffers;
     });
   }
 
   private checkUserType(): void {
     this.isCompany = this.authService.isCompany();
+  }
+
+  onSearch(): void {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredJobOffers = this.jobOffers.filter((offer) =>
+      offer.title.toLowerCase().includes(searchTermLower)
+    );
   }
 
   navigateToDetails(id: number): void {

@@ -20,23 +20,34 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.login(this.email, this.password).subscribe((response) => {
-      if (response?.token) {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sukces',
-          detail: 'Zalogowano pomyślnie!',
-        });
-        this.router.navigate(['/offers']);
-      } else {
-        this.errorMessage = 'Nieprawidłowe dane logowania.';
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        if (response?.token) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sukces',
+            detail: 'Zalogowano pomyślnie!',
+          });
+          this.router.navigate(['/offers']);
+        } else {
+          this.errorMessage = 'Nieprawidłowe dane logowania.';
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Błąd logowania',
+            detail: 'Nieprawidłowy email lub hasło!',
+          });
+        }
+      },
+      error: (err) => {
+        const errorMsg = 'Błąd logowania';
         this.messageService.add({
           severity: 'error',
-          summary: 'Błąd logowania',
-          detail: 'Nieprawidłowy email lub hasło!',
+          summary: 'Błąd',
+          detail: errorMsg
         });
       }
-    });
+    }
+    );
   }
 
   public onRegister() {

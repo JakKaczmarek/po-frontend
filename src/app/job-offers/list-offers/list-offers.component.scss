@@ -14,6 +14,26 @@
         text-align: center;
     }
 
+    .search-bar {
+        width: 100%;
+        max-width: 50%;
+        margin-bottom: 2rem;
+
+        input[pInputText] {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                border-color: #007ad9;
+                box-shadow: 0 0 5px rgba(0, 122, 217, 0.5);
+            }
+        }
+    }
+
     .create-offer-btn {
         margin-bottom: 2rem;
 
