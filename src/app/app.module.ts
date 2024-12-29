@@ -24,6 +24,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DialogModule } from 'primeng/dialog';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { UserOffersComponent } from './job-offers/user-offers/user-offers.component';
+import { ApplicationsComponent } from './job-offers/applications/applications.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserOffersComponent } from './job-offers/user-offers/user-offers.compon
     OfferDetailsComponent,
     NavbarComponent,
     UserOffersComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,

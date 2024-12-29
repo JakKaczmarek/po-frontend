@@ -29,4 +29,7 @@ export class JobOfferService {
     return this.http.get(`${this.apiUrl}/user/job-offers`);
   }
 
+  getApplications(offerId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job-offers/${offerId}/applications`);
+  }
 }

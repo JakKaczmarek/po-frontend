@@ -1,0 +1,55 @@
+.applications {
+    padding: 2rem 5%;
+    background-color: #f5f6fa;
+    min-height: 100vh;
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    .loading,
+    .error,
+    .no-applications {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #777;
+        margin-top: 2rem;
+    }
+
+    .applications-table {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #6366F1;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+}

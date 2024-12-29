@@ -1,0 +1,41 @@
+<div class="applications">
+    <h2>Aplikacje na ofertę pracy</h2>
+
+    <div *ngIf="loading" class="loading">
+        <p>Ładowanie aplikacji...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    <table *ngIf="!loading && applications.length > 0" class="applications-table">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>CV</th>
+                <th>Data aplikacji</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let application of applications">
+                <td>{{ application.firstName }}</td>
+                <td>{{ application.lastName }}</td>
+                <td>{{ application.email }}</td>
+                <td>{{ application.phone }}</td>
+                <td>
+                    <button pButton label="Pobierz CV" icon="pi pi-download" (click)="downloadCV(application.cvFile)"
+                        class="p-button-secondary"></button>
+                </td>
+                <td>{{ application.appliedAt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!loading && applications.length === 0" class="no-applications">
+        <p>Brak aplikacji na tę ofertę.</p>
+    </div>
+</div>

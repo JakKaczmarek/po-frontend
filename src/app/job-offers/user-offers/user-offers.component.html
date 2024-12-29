@@ -11,5 +11,9 @@
         <div>Lokalizacja: {{ offer.location }}</div>
         <div>Wynagrodzenie: {{ offer.salary || 'Nie podano' }}</div>
         <div>Utworzono: {{ offer.createdAt }}</div>
+        <div>
+            <p-button label="Aplikacje" icon="pi pi-users" (click)="navigateToApplications(offer.id)"
+                class="p-button-info"></p-button>
+        </div>
     </p-card>
 </div>

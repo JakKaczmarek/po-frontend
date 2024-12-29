@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobOfferService } from '../../services/job-offer.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-offers',
@@ -13,7 +14,8 @@ export class UserOffersComponent implements OnInit {
 
   constructor(
     private jobOfferService: JobOfferService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,9 @@ export class UserOffersComponent implements OnInit {
       this.loadUserOffers();
     }
   }
-
+  navigateToApplications(offerId: number): void {
+    this.router.navigate(['/offers', offerId, 'applications']);
+  }
   private loadUserOffers(): void {
     this.jobOfferService.getUserJobOffers().subscribe((data) => {
       this.userOffers = data;

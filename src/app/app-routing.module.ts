@@ -6,6 +6,7 @@ import { ListOffersComponent } from './job-offers/list-offers/list-offers.compon
 import { CreateOfferComponent } from './job-offers/create-offer/create-offer.component';
 import { OfferDetailsComponent } from './job-offers/offer-details/offer-details.component';
 import { UserOffersComponent } from './job-offers/user-offers/user-offers.component';
+import { ApplicationsComponent } from './job-offers/applications/applications.component';
 
 const routes: Routes = [
   // Kiedy wchodzimy na '/', chcemy przekierować na '/login'
@@ -21,9 +22,10 @@ const routes: Routes = [
   { path: 'offers/:id', component: OfferDetailsComponent },
 
   { path: 'user-offers', component: UserOffersComponent },
+  { path: 'offers/:id/applications', component: ApplicationsComponent },
 
-  // (opcjonalnie) 404 page
-  { path: '**', redirectTo: '/login' }
+  // // (opcjonalnie) 404 page
+  // { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
