@@ -1,70 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api'; // Twój backend Symfony
+  private apiUrl = 'http://localhost:8000/api';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  /**
-   * Logowanie użytkownika
-   * @param email
-   * @param password
-   */
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
-      tap((response) => {
+    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap((response: any) => {
         if (response.token) {
-          this.saveToken(response.token);
+          // Zapisz token w localStorage
+          localStorage.setItem('authToken', response.token);
+
+          // Dekoduj token JWT i zapisz dane użytkownika
+          const decodedToken: any = jwtDecode(response.token);
+          localStorage.setItem('user', JSON.stringify(decodedToken));
         }
-      }),
-      catchError((error) => {
-        console.error('Błąd logowania', error);
-        return of(null); // Możesz obsłużyć błąd w komponencie
       })
     );
   }
 
-  /**
-   * Wylogowanie użytkownika
-   */
-  logout() {
-    this.clearToken();
-    this.router.navigate(['/login']);
-  }
-
-  /**
-   * Zapisz token do localStorage
-   * @param token
-   */
-  private saveToken(token: string) {
-    localStorage.setItem('authToken', token); // Możesz użyć sessionStorage
-  }
-
-  /**
-   * Pobierz token z localStorage
-   */
-  getToken(): string | null {
-    return localStorage.getItem('authToken');
-  }
-
-  /**
-   * Usuń token z localStorage
-   */
-  private clearToken() {
+  logout(): void {
+    // Usuń dane z localStorage podczas wylogowania
     localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
   }
 
-  /**
-   * Sprawdź, czy użytkownik jest zalogowany
-   */
-  isLoggedIn(): boolean {
-    return !!this.getToken();
+  getUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  hasRole(role: string): boolean {
+    const user = this.getUser();
+    return user?.roles?.includes(role) ?? false;
+  }
+
+  isCompany(): boolean {
+    return this.hasRole('ROLE_COMPANY');
   }
 }

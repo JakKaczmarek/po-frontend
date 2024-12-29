@@ -1,1 +1,20 @@
-<p>list-offers works!</p>
+<div class="job-offers">
+    <h2>Oferty pracy</h2>
+
+    <!-- Przycisk do tworzenia ofert -->
+    <div *ngIf="isCompany" class="create-offer-btn">
+        <p-button label="Dodaj ofertę pracy" icon="pi pi-plus" class="p-button-success"
+            (onClick)="navigateToCreateOffer()"></p-button>
+    </div>
+
+    <!-- Lista ofert -->
+    <p-card *ngFor="let offer of jobOffers" class="job-card">
+        <div class="p-card-title">{{ offer.title }}</div>
+        <div class="p-card-subtitle">Firma: {{ offer.companyName }}</div>
+        <div>Lokalizacja: {{ offer.location }}</div>
+        <div>Wynagrodzenie: {{ offer.salary || 'Nie podano' }}</div>
+        <div>
+            <p-button label="Szczegóły" icon="pi pi-eye" (onClick)="navigateToDetails(offer.id)"></p-button>
+        </div>
+    </p-card>
+</div>

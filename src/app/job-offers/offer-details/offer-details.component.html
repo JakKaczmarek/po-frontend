@@ -1,1 +1,42 @@
-<p>offer-details works!</p>
+<div class="offer-details">
+    <div *ngIf="loading" class="loading">
+        <p>Ładowanie szczegółów oferty...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    <div *ngIf="!loading && jobOffer">
+        <h1>{{ jobOffer.title }}</h1>
+        <p><strong>Firma:</strong> {{ jobOffer.companyName }}</p>
+        <p><strong>Opis:</strong></p>
+        <p>{{ jobOffer.description }}</p>
+        <p><strong>Lokalizacja:</strong> {{ jobOffer.location }}</p>
+        <p><strong>Wynagrodzenie:</strong> {{ jobOffer.salary || 'Nie podano' }}</p>
+        <p><strong>Data utworzenia:</strong> {{ jobOffer.createdAt }}</p>
+        <p><strong>Kontakt:</strong> {{ jobOffer.company }}</p>
+
+        <!-- Przyciski Wróć i Aplikuj -->
+        <div class="buttons-row">
+            <p-button label="Wróć" icon="pi pi-arrow-left" class="p-button-secondary"
+                (onClick)="navToOffers()"></p-button>
+            <p-button label="Aplikuj" icon="pi pi-send" class="p-button-success" (onClick)="openDialog()"></p-button>
+        </div>
+
+        <!-- Popup do aplikowania -->
+        <p-dialog [(visible)]="showDialog" header="Aplikuj na ofertę" [modal]="true" [closable]="false"
+            [responsive]="true" [style]="{ width: '400px' }">
+            <div class="application-form">
+                <h3>Załącz swoje CV (PDF)</h3>
+                <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+                <div class="popup-buttons">
+                    <p-button label="Anuluj" icon="pi pi-times" class="p-button-secondary"
+                        (onClick)="closeDialog()"></p-button>
+                    <p-button label="Aplikuj" icon="pi pi-check" class="p-button-success"
+                        (onClick)="onApply()"></p-button>
+                </div>
+            </div>
+        </p-dialog>
+    </div>
+</div>
