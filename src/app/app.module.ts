@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DialogModule } from 'primeng/dialog';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { UserOffersComponent } from './job-offers/user-offers/user-offers.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     CreateOfferComponent,
     OfferDetailsComponent,
     NavbarComponent,
+    UserOffersComponent,
   ],
   imports: [
     BrowserModule,

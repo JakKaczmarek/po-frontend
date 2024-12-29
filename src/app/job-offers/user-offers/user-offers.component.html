@@ -1,0 +1,15 @@
+<div class="user-offers">
+    <h2>Twoje oferty pracy</h2>
+
+    <div *ngIf="userOffers.length === 0" class="no-offers">
+        <p>Nie masz jeszcze żadnych ofert pracy.</p>
+    </div>
+
+    <p-card *ngFor="let offer of userOffers" class="job-card">
+        <div class="p-card-title">{{ offer.title }}</div>
+        <div class="p-card-subtitle">Firma: {{ offer.companyName }}</div>
+        <div>Lokalizacja: {{ offer.location }}</div>
+        <div>Wynagrodzenie: {{ offer.salary || 'Nie podano' }}</div>
+        <div>Utworzono: {{ offer.createdAt }}</div>
+    </p-card>
+</div>

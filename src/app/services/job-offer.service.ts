@@ -24,4 +24,9 @@ export class JobOfferService {
   createJobOffer(jobOffer: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/job-offers`, jobOffer);
   }
+
+  getUserJobOffers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/job-offers`);
+  }
+
 }

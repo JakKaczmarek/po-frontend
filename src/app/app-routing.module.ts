@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ListOffersComponent } from './job-offers/list-offers/list-offers.component';
 import { CreateOfferComponent } from './job-offers/create-offer/create-offer.component';
 import { OfferDetailsComponent } from './job-offers/offer-details/offer-details.component';
+import { UserOffersComponent } from './job-offers/user-offers/user-offers.component';
 
 const routes: Routes = [
   // Kiedy wchodzimy na '/', chcemy przekierować na '/login'
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'offers', component: ListOffersComponent },
   { path: 'offers/new', component: CreateOfferComponent },
   { path: 'offers/:id', component: OfferDetailsComponent },
+
+  { path: 'user-offers', component: UserOffersComponent },
 
   // (opcjonalnie) 404 page
   { path: '**', redirectTo: '/login' }

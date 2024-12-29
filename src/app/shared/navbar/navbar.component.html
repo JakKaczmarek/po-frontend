@@ -1,8 +1,10 @@
 <div class="navbar">
-    <div class="logo">
+    <div (click)="navigateToGeneralScreen()" class="logo">
         <h1>Platforma Ogłoszeniowa</h1>
     </div>
     <div class="actions">
+        <button *ngIf="isCompany" pButton type="button" label="Moje oferty" icon="pi pi-briefcase"
+            class="p-button-secondary" (click)="navigateToUserOffers()"></button>
         <button pButton type="button" label="Wyloguj" icon="pi pi-sign-out" class="p-button-danger"
             (click)="logout()"></button>
     </div>
