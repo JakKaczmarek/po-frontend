@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobOfferService } from '../../services/job-offer.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-offer',
@@ -16,17 +17,25 @@ export class CreateOfferComponent {
     salary: null,
   };
 
-  constructor(private jobOfferService: JobOfferService, private router: Router) { }
+  constructor(private jobOfferService: JobOfferService, private router: Router, private messageService: MessageService) { }
 
   onSubmit(): void {
     this.jobOfferService.createJobOffer(this.offer).subscribe({
       next: () => {
-        alert('Oferta została pomyślnie dodana!');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sukces',
+          detail: 'Oferta została pomyślnie dodana!',
+        });
         this.router.navigate(['/offers']);
       },
       error: (err) => {
         console.error('Błąd podczas dodawania oferty:', err);
-        alert('Nie udało się dodać oferty. Spróbuj ponownie.');
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Błąd logowania',
+          detail: 'Nie udało się dodać oferty. Spróbuj ponownie.',
+        });
       }
     });
   }
