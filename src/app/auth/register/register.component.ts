@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -11,51 +14,52 @@ export class RegisterComponent {
   firstName = '';
   lastName = '';
   phone = '';
-
-  // Zmienna do przechowywania wyboru typu użytkownika (radio):
-  // 'user' = zwykły użytkownik, 'company' = firma
   userType: 'user' | 'company' = 'user';
 
   errorMessage = '';
-  successMessage = '';
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService
+  ) { }
 
   onRegister() {
-    // Prosta walidacja pol wymagalnych
     if (!this.email || !this.password || !this.firstName || !this.lastName || !this.phone) {
-      this.errorMessage = 'Wypełnij wszystkie pola!';
-      this.successMessage = '';
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Błąd',
+        detail: 'Wypełnij wszystkie pola!'
+      });
       return;
     }
 
-    // Wyliczamy isCompany w zależności od wybranej opcji:
-    const isCompany = this.userType === 'company';
-
-    // Przygotowujemy obiekt do wysłania na backend:
     const registerData = {
       email: this.email,
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName,
       phone: this.phone,
-      isCompany: isCompany
+      isCompany: this.userType === 'company'
     };
 
-    // Tu normalnie wysyłasz dane do backendu, np.:
-    // this.authService.register(registerData).subscribe({
-    //   next: () => {
-    //     this.successMessage = 'Zarejestrowano pomyślnie!';
-    //     this.errorMessage = '';
-    //   },
-    //   error: (err) => {
-    //     this.errorMessage = err.error?.message || 'Błąd rejestracji';
-    //   }
-    // });
-
-    // Na potrzeby przykładu tylko symulujemy rejestrację:
-    console.log('Dane rejestracyjne:', registerData);
-    this.successMessage = 'Zarejestrowano pomyślnie!';
-    this.errorMessage = '';
+    this.authService.register(registerData).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sukces',
+          detail: 'Zarejestrowano pomyślnie!'
+        });
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        const errorMsg = err.error?.message || 'Błąd rejestracji';
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Błąd',
+          detail: errorMsg
+        });
+      }
+    });
   }
 }
